@@ -1,0 +1,23 @@
+{
+  "name": "@reactleaf/storage",
+  "version": "0.0.5",
+  "description": "Type-safe storage accessor",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reactleaf/storage.git"
+  },
+  "keywords": [
+    "storage"
+  ],
+  "author": "HS Yang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reactleaf/storage/issues"
+  },
+  "homepage": "https://github.com/reactleaf/storage#readme"
+}
