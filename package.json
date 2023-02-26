@@ -1,6 +1,6 @@
 {
   "name": "@reactleaf/storage",
-  "version": "0.0.5",
+  "version": "0.1.1",
   "description": "Type-safe storage accessor",
   "main": "index.js",
   "scripts": {

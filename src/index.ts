@@ -1,6 +1,4 @@
-export interface StorageData {}
-
-export default class StorageAccessor {
+export default class StorageAccessor<StorageData extends {}> {
   #prefix: string;
   #getStorage: () => Storage;
 
@@ -9,11 +7,11 @@ export default class StorageAccessor {
     this.#getStorage = getStorage ?? (() => window.localStorage);
   }
 
-  #prefixer(key: string) {
+  #prefixer(key: string | number | symbol) {
     if (this.#prefix) {
-      return `${this.#prefix}/${key}`;
+      return `${this.#prefix}${String(key)}`;
     }
-    return key;
+    return String(key);
   }
 
   get<K extends keyof StorageData>(key: K): StorageData[K] | null {

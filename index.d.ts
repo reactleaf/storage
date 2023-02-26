@@ -1,6 +1,4 @@
-export interface StorageData {
-}
-export default class StorageAccessor {
+export default class StorageAccessor<StorageData extends {}> {
     #private;
     constructor(prefix?: string, getStorage?: () => Storage);
     get<K extends keyof StorageData>(key: K): StorageData[K] | null;

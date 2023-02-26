@@ -21,7 +21,7 @@ yarn add @reactleaf/storage
 ```typescript
 import StorageAccessor from '@reactleaf/storage`
 
-const storage = new StorageAccessor("prefix")
+const storage = new StorageAccessor<{ key: { value: number } }>("prefix")
 
 // set
 storage.set("key", { value: 1 })
@@ -38,24 +38,13 @@ storage.remove("key")
 Type-safe를 제공하기 위해서, 스토리지에 저장된 값들의 타입을 알려주어야 합니다.
 
 ```typescript
-// in your custom d.ts
+const storage = new StorageAccesssor<{
+  key: { value: number };
+  SomeToken: string;
+  SomeTimestamp: number;
+}>("prefix");
 
-import "@reactleaf/storage";
-
-declare module "@reactleaf/storage" {
-  interface StorageData {
-    key: { value: number };
-    SomeToken: string;
-    SomeTimestamp: number;
-  }
-}
-```
-
-이제, storage에서 꺼낸 값의 타입을 추론합니다.
-
-```typescript
-const storage = new StorageAccesssor("prefix");
-
+// 저장된 타입을 알고 있으므로, storage에서 꺼낸 값의 타입을 추론할 수 있습니다.
 const token = storage.get("SomeToken"); // token is string
 const { value } = storage.get("key"); // value is number
 ```
@@ -65,11 +54,9 @@ const { value } = storage.get("key"); // value is number
 스토리지를 구분하기 위해, prefix를 다양하게 구성해 각각 사용할 수 있습니다.
 
 ```typescript
-const defaultStorage = new StorageAccesssor("myProject"); // key as `myProject/${key}`
-const authStorage = new StorageAccesssor("auth"); // key as `auth/${key}`
+const defaultStorage = new StorageAccesssor<{ notified_100: boolean }>("myProject/"); // stored as `myProject/${key}`
+const authStorage = new StorageAccesssor<{ accessToken: string }>("auth_"); // stored as `auth_${key}`
 ```
-
-단, `StorageData`는 동일한 타입을 참조합니다.
 
 ### Using Other Storage
 
